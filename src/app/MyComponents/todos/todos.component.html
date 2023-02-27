@@ -1,5 +1,11 @@
-<div *ngFor="let todo of todos" >
-    <app-todo-item [todo]="todo"t>
-    </app-todo-item>
+<app-add-todo (todoAdd)="addTodo($event)"> </app-add-todo>
 
-</div>
+<h4>Your Todos</h4>
+<div *ngIf="this.todos.length === 0; else elseBlock">No Todos to display</div>
+<ng-template #elseBlock>
+  <div *ngFor="let todo of todos;index as i">
+    <app-todo-item [todo]="todo" (todoDelete)="deleteTodo($event)"
+   [i]="i" (todoCheckbox)="toggleTodo($event)">
+    </app-todo-item>
+  </div>
+</ng-template>
